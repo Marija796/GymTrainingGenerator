@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "681335563808",
+    "project_id": "gymtraininggenerator",
+    "storage_bucket": "gymtraininggenerator.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681335563808:android:7c324d564b679214a4be45",
+        "android_client_info": {
+          "package_name": "com.marijamihajlovska.gymtraininggenerator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8SiPzEp9fKzUpamUYqWuOF5xb0iyiFdI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

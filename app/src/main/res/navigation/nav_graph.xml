@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.auth.LoginFragment"
+        android:label="Login" />
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.auth.RegisterFragment"
+        android:label="Register" />
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.dashboard.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.profile.ProfileFragment"
+        android:label="Profile" />
+
+    <fragment
+        android:id="@+id/generatorFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.generator.GeneratorFragment"
+        android:label="Generator" />
+
+    <fragment
+        android:id="@+id/workoutFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.workout.WorkoutFragment"
+        android:label="Workout" />
+
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.exercises.ExercisesFragment"
+        android:label="Exercises" />
+
+    <fragment
+        android:id="@+id/progressFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.progress.ProgressFragment"
+        android:label="Progress" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.history.HistoryFragment"
+        android:label="History" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.marijamihajlovska.gymtraininggenerator.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
+</navigation>
