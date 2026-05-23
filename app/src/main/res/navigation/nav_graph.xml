@@ -7,51 +7,86 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.auth.LoginFragment"
-        android:label="Login" />
+        android:label="Login">
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"/>
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.auth.RegisterFragment"
-        android:label="Register" />
+        android:label="Register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment"/>
+        <action
+            android:id="@+id/action_registerFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.dashboard.DashboardFragment"
-        android:label="Dashboard" />
+        android:label="Dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_generatorFragment"
+            app:destination="@id/generatorFragment"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_progressFragment"
+            app:destination="@id/progressFragment"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_historyFragment"
+            app:destination="@id/historyFragment"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_loginFragment"
+            app:destination="@id/loginFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.profile.ProfileFragment"
-        android:label="Profile" />
+        android:label="Profile"/>
 
     <fragment
         android:id="@+id/generatorFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.generator.GeneratorFragment"
-        android:label="Generator" />
+        android:label="Generator">
+        <action
+            android:id="@+id/action_generatorFragment_to_workoutFragment"
+            app:destination="@id/workoutFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/workoutFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.workout.WorkoutFragment"
-        android:label="Workout" />
+        android:label="Workout">
+        <action
+            android:id="@+id/action_workoutFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/exercisesFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.exercises.ExercisesFragment"
-        android:label="Exercises" />
+        android:label="Exercises"/>
 
     <fragment
         android:id="@+id/progressFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.progress.ProgressFragment"
-        android:label="Progress" />
+        android:label="Progress"/>
 
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.history.HistoryFragment"
-        android:label="History" />
+        android:label="History"/>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.marijamihajlovska.gymtraininggenerator.ui.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="Settings"/>
 
 </navigation>
