@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Gym Training Generator</string>
+    <string name="default_web_client_id">681335563808-jhjo9madddns1leq272fevg4dmjmo3ap.apps.googleusercontent.com</string>
 
     <!-- Auth -->
     <string name="login">Login</string>
