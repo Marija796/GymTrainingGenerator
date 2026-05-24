@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Gym Training Generator</string>
+
+    <!-- Auth -->
+    <string name="login">Најави се</string>
+    <string name="register">Регистрирај се</string>
+    <string name="email">Е-пошта</string>
+    <string name="password">Лозинка</string>
+    <string name="full_name">Целосно ime</string>
+    <string name="login_with_google">Најави се со Google</string>
+    <string name="login_with_facebook">Најави се со Facebook</string>
+    <string name="continue_as_guest">Продолжи како гостин</string>
+    <string name="no_account">Немаш акаунт? Регистрирај се</string>
+    <string name="have_account">Веќе имаш акаунт? Најави се</string>
+    <string name="fill_all_fields">Пополни ги сите полиња</string>
+    <string name="password_length">Лозинката мора да има најмалку 6 знаци</string>
+
+    <!-- Dashboard -->
+    <string name="welcome">Добредојде!</string>
+    <string name="ready_to_train">Готов за тренинг денес?</string>
+    <string name="generate_workout">Генерирај тренинг</string>
+    <string name="create_plan">Креирај персонализиран тренинг план</string>
+    <string name="start_generator">Започни генератор</string>
+    <string name="my_progress">Мој напредок</string>
+    <string name="track_journey">Следи го твојот фитнес пат</string>
+    <string name="view_progress">Погледни напредок</string>
+    <string name="workout_history">Историја на тренинзи</string>
+    <string name="see_past_workouts">Погледни ги минатите тренинзи</string>
+    <string name="view_history">Погледни историја</string>
+    <string name="logout">Одјави се</string>
+
+    <!-- Generator -->
+    <string name="fitness_goal">Фитнес цел</string>
+    <string name="fitness_level">Фитнес ниво</string>
+    <string name="training_days">Денови за тренинг неделно</string>
+    <string name="muscle_focus">Фокус на мускули</string>
+    <string name="generate_plan">Генерирај мој тренинг план</string>
+    <string name="workout_generated">Тренинг планот е генериран!</string>
+
+    <!-- Workout -->
+    <string name="your_workout_plan">Твојот тренинг план</string>
+    <string name="mark_complete">Означи како завршен</string>
+    <string name="back_to_dashboard">Назад на почетна</string>
+    <string name="workout_completed">Тренингот е завршен! Браво!</string>
+
+    <!-- Profile -->
+    <string name="my_profile">Мој профил</string>
+    <string name="age">Возраст</string>
+    <string name="height_cm">Висина (cm)</string>
+    <string name="weight_kg">Тежина (kg)</string>
+    <string name="save_profile">Зачувај профил</string>
+    <string name="profile_saved">Профилот е зачуван!</string>
+
+    <!-- Progress -->
+    <string name="total_workouts">Вкупно тренинзи</string>
+    <string name="completed_workouts">Завршени тренинзи</string>
+    <string name="favorite_goal">Омилена цел</string>
+
+    <!-- Settings -->
+    <string name="settings">Поставки</string>
+    <string name="language">Јазик</string>
+    <string name="save_settings">Зачувај поставки</string>
+    <string name="delete_account">Избриши акаунт</string>
+    <string name="delete_account_confirm">Дали сте сигурни дека сакате да го избришете акаунтот?</string>
+    <string name="delete">Избриши</string>
+    <string name="cancel">Откажи</string>
+    <string name="settings_saved">Поставките се зачувани!</string>
+
+    <!-- Exercises -->
+    <string name="exercise_library">Библиотека на вежби</string>
+</resources>

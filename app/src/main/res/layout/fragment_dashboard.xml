@@ -14,7 +14,7 @@
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome!"
+            android:text="@string/welcome"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -23,7 +23,7 @@
             android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ready to train today?"
+            android:text="@string/ready_to_train"
             android:textSize="16sp"
             android:layout_marginBottom="24dp"/>
 
@@ -42,19 +42,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Generate Workout"
+                    android:text="@string/generate_workout"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Create a personalized training plan"
+                    android:text="@string/create_plan"
                     android:layout_marginBottom="12dp"/>
                 <Button
                     android:id="@+id/btnGenerate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start Generator"/>
+                    android:text="@string/start_generator"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -73,19 +73,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="My Progress"
+                    android:text="@string/my_progress"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Track your fitness journey"
+                    android:text="@string/track_journey"
                     android:layout_marginBottom="12dp"/>
                 <Button
                     android:id="@+id/btnProgress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View Progress"/>
+                    android:text="@string/view_progress"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -104,19 +104,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Workout History"
+                    android:text="@string/workout_history"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="See your past workouts"
+                    android:text="@string/see_past_workouts"
                     android:layout_marginBottom="12dp"/>
                 <Button
                     android:id="@+id/btnHistory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="View History"/>
+                    android:text="@string/view_history"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -124,7 +124,7 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/logout"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
     </LinearLayout>

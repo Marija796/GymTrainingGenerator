@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Workout Plan"
+        android:text="@string/your_workout_plan"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -31,7 +31,7 @@
         android:id="@+id/btnComplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mark as Complete"
+        android:text="@string/mark_complete"
         android:layout_marginBottom="8dp"/>
 
     <Button
@@ -39,6 +39,6 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back to Dashboard"/>
+        android:text="@string/back_to_dashboard"/>
 
 </LinearLayout>

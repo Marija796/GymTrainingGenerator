@@ -12,7 +12,20 @@
           "package_name": "com.marijamihajlovska.gymtraininggenerator"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "681335563808-renve23jbllb89ciu8q7mv4rg1jgjd2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marijamihajlovska.gymtraininggenerator",
+            "certificate_hash": "77b090dd20ce7b32648d17a38b8ed45152b62930"
+          }
+        },
+        {
+          "client_id": "681335563808-jhjo9madddns1leq272fevg4dmjmo3ap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC8SiPzEp9fKzUpamUYqWuOF5xb0iyiFdI"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681335563808-jhjo9madddns1leq272fevg4dmjmo3ap.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
