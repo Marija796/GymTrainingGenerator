@@ -66,6 +66,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/ivArrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/arrow_down_float"/>
@@ -77,25 +78,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp"
+            android:padding="16dp"
             android:background="#FFF8F5"
             android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivGif"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="220dp"
                 android:scaleType="fitCenter"
+                android:background="#F5F5F5"
                 android:padding="8dp"
                 android:layout_marginBottom="12dp"/>
 
             <TextView
                 android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="#424242"
-                android:lineSpacingMultiplier="1.5"/>
+                android:lineSpacingMultiplier="1.6"
+                android:padding="4dp"/>
 
         </LinearLayout>
 

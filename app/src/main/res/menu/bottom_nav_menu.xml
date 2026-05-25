@@ -3,27 +3,27 @@
 
     <item
         android:id="@+id/dashboardFragment"
-        android:icon="@android:drawable/ic_menu_today"
+        android:icon="@drawable/baseline_home_24"
         android:title="Home"/>
 
     <item
         android:id="@+id/generatorFragment"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/baseline_add_24"
         android:title="Generate"/>
 
     <item
+        android:id="@+id/exercisesFragment"
+        android:icon="@drawable/baseline_fitness_center_24"
+        android:title="Exercises"/>
+
+    <item
         android:id="@+id/progressFragment"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/baseline_bar_chart_24"
         android:title="Progress"/>
 
     <item
         android:id="@+id/historyFragment"
-        android:icon="@android:drawable/ic_menu_recent_history"
+        android:icon="@drawable/baseline_history_24"
         android:title="History"/>
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:title="Settings"/>
 
 </menu>
