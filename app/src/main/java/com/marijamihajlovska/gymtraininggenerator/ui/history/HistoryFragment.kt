@@ -11,7 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.marijamihajlovska.gymtraininggenerator.R
 import com.marijamihajlovska.gymtraininggenerator.databinding.FragmentHistoryBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+data class HistoryItem(
+    val goal: String,
+    val muscleFocus: String,
+    val date: Long,
+    val completed: Boolean
+)
 
 class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
@@ -20,9 +31,7 @@ class HistoryFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
@@ -32,26 +41,40 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         loadHistory()
     }
 
     private fun loadHistory() {
-        val uid = auth.currentUser?.uid ?: return
+        val uid = auth.currentUser?.uid ?: run {
+            _binding?.tvEmptyHistory?.visibility = View.VISIBLE
+            return
+        }
         db.collection("workouts")
             .whereEqualTo("userId", uid)
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val workouts = documents.map { doc ->
-                    val goal = doc.getString("goal") ?: ""
-                    val muscle = doc.getString("muscleFocus") ?: ""
-                    val completed = doc.getBoolean("completed") ?: false
-                    val status = if (completed) "✓ Completed" else "In Progress"
-                    "$goal - $muscle ($status)"
+                val b = _binding ?: return@addOnSuccessListener
+                val items = documents.mapNotNull { doc ->
+                    HistoryItem(
+                        goal = doc.getString("goal") ?: return@mapNotNull null,
+                        muscleFocus = doc.getString("muscleFocus") ?: "",
+                        date = doc.getLong("date") ?: 0L,
+                        completed = doc.getBoolean("completed") ?: false
+                    )
                 }
-                binding.rvHistory.adapter = HistoryAdapter(workouts)
+                if (items.isEmpty()) {
+                    b.tvEmptyHistory.visibility = View.VISIBLE
+                    b.rvHistory.visibility = View.GONE
+                } else {
+                    b.tvEmptyHistory.visibility = View.GONE
+                    b.rvHistory.visibility = View.VISIBLE
+                    b.rvHistory.adapter = HistoryAdapter(items)
+                }
+            }
+            .addOnFailureListener {
+                _binding?.tvEmptyHistory?.visibility = View.VISIBLE
             }
     }
 
@@ -61,21 +84,36 @@ class HistoryFragment : Fragment() {
     }
 }
 
-class HistoryAdapter(private val items: List<String>) :
+class HistoryAdapter(private val items: List<HistoryItem>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
+    private val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvItem: TextView = itemView.findViewById(android.R.id.text1)
+        val tvGoal: TextView = itemView.findViewById(R.id.tvHistoryGoal)
+        val tvMuscle: TextView = itemView.findViewById(R.id.tvHistoryMuscle)
+        val tvDate: TextView = itemView.findViewById(R.id.tvHistoryDate)
+        val tvStatus: TextView = itemView.findViewById(R.id.tvHistoryStatus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(android.R.layout.simple_list_item_1, parent, false)
+            .inflate(R.layout.item_history, parent, false)
         return HistoryViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.tvItem.text = items[position]
+        val item = items[position]
+        holder.tvGoal.text = item.goal
+        holder.tvMuscle.text = item.muscleFocus
+        holder.tvDate.text = dateFormat.format(Date(item.date))
+        if (item.completed) {
+            holder.tvStatus.text = holder.itemView.context.getString(R.string.status_completed)
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_completed)
+        } else {
+            holder.tvStatus.text = holder.itemView.context.getString(R.string.status_in_progress)
+            holder.tvStatus.setBackgroundResource(R.drawable.bg_badge)
+        }
     }
 
     override fun getItemCount() = items.size

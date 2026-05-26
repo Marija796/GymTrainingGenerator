@@ -2,6 +2,11 @@
     <string name="app_name">Gym Training Generator</string>
     <string name="default_web_client_id">681335563808-jhjo9madddns1leq272fevg4dmjmo3ap.apps.googleusercontent.com</string>
 
+    <!-- Facebook SDK — replace with your actual values from developers.facebook.com -->
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
+
     <!-- Auth -->
     <string name="login">Login</string>
     <string name="register">Register</string>
@@ -15,9 +20,17 @@
     <string name="have_account">Already have an account? Login</string>
     <string name="fill_all_fields">Please fill all fields</string>
     <string name="password_length">Password must be at least 6 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="google_sign_in_failed">Google sign-in failed</string>
+    <string name="anonymous_login_failed">Anonymous login failed</string>
+    <string name="facebook_login_failed">Facebook login failed</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="sign_in_subtitle">Sign in to continue your fitness journey</string>
 
     <!-- Dashboard -->
     <string name="welcome">Welcome!</string>
+    <string name="welcome_user">Welcome, %s!</string>
     <string name="ready_to_train">Ready to train today?</string>
     <string name="generate_workout">Generate Workout</string>
     <string name="create_plan">Create a personalized training plan</string>
@@ -29,6 +42,7 @@
     <string name="see_past_workouts">See your past workouts</string>
     <string name="view_history">View History</string>
     <string name="logout">Logout</string>
+    <string name="quick_actions">Quick Actions</string>
 
     <!-- Generator -->
     <string name="fitness_goal">Fitness Goal</string>
@@ -37,12 +51,50 @@
     <string name="muscle_focus">Muscle Focus</string>
     <string name="generate_plan">Generate My Workout Plan</string>
     <string name="workout_generated">Workout plan generated!</string>
+    <string name="generator_subtitle">Fill in your preferences and we\'ll build your plan</string>
+    <string name="error_generating">Error generating workout. Please try again.</string>
+
+    <!-- Spinner arrays -->
+    <string-array name="fitness_goals">
+        <item>Lose Weight</item>
+        <item>Build Muscle</item>
+        <item>Stay Fit</item>
+        <item>Increase Strength</item>
+    </string-array>
+    <string-array name="fitness_levels">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+    <string-array name="training_days_options">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="muscle_focus_options">
+        <item>Full Body</item>
+        <item>Upper Body</item>
+        <item>Lower Body</item>
+        <item>Push</item>
+        <item>Pull</item>
+        <item>Legs</item>
+    </string-array>
 
     <!-- Workout -->
     <string name="your_workout_plan">Your Workout Plan</string>
     <string name="mark_complete">Mark as Complete</string>
     <string name="back_to_dashboard">Back to Dashboard</string>
     <string name="workout_completed">Workout completed! Great job!</string>
+    <string name="workout_already_completed">Already completed!</string>
+    <string name="plan_info">Goal: %1$s | Level: %2$s | Focus: %3$s</string>
+
+    <!-- History -->
+    <string name="no_history">No workouts yet. Generate your first plan!</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="history_item_format">%1$s — %2$s</string>
 
     <!-- Profile -->
     <string name="my_profile">My Profile</string>
@@ -51,22 +103,35 @@
     <string name="weight_kg">Weight (kg)</string>
     <string name="save_profile">Save Profile</string>
     <string name="profile_saved">Profile saved!</string>
+    <string name="profile_subtitle">Keep your info up to date for better plans</string>
 
     <!-- Progress -->
     <string name="total_workouts">Total Workouts</string>
-    <string name="completed_workouts">Completed Workouts</string>
+    <string name="completed_workouts">Completed</string>
     <string name="favorite_goal">Favorite Goal</string>
+    <string name="progress_subtitle">Your fitness stats</string>
+    <string name="no_data">—</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
     <string name="save_settings">Save Settings</string>
     <string name="delete_account">Delete Account</string>
-    <string name="delete_account_confirm">Are you sure you want to delete your account?</string>
+    <string name="delete_account_confirm">Are you sure you want to delete your account? This cannot be undone.</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
     <string name="settings_saved">Settings saved!</string>
 
     <!-- Exercises -->
     <string name="exercise_library">Exercise Library</string>
+    <string name="search_exercises">Search exercises, muscles…</string>
+    <string name="category_all">All</string>
+    <string name="tap_to_expand">Tap a card to see the exercise video</string>
+
+    <!-- Athlete placeholder name -->
+    <string name="default_athlete_name">Athlete</string>
 </resources>

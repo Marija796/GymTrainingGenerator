@@ -20,9 +20,7 @@ class GeneratorFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
         return binding.root
@@ -32,19 +30,15 @@ class GeneratorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-
         setupSpinners()
-
-        binding.btnGenerate.setOnClickListener {
-            generateWorkout()
-        }
+        binding.btnGenerate.setOnClickListener { generateWorkout() }
     }
 
     private fun setupSpinners() {
-        val goals = listOf("Lose Weight", "Build Muscle", "Stay Fit", "Increase Strength")
-        val levels = listOf("Beginner", "Intermediate", "Advanced")
-        val days = listOf("2", "3", "4", "5", "6")
-        val muscles = listOf("Full Body", "Upper Body", "Lower Body", "Push", "Pull", "Legs")
+        val goals = resources.getStringArray(R.array.fitness_goals).toList()
+        val levels = resources.getStringArray(R.array.fitness_levels).toList()
+        val days = resources.getStringArray(R.array.training_days_options).toList()
+        val muscles = resources.getStringArray(R.array.muscle_focus_options).toList()
 
         binding.spinnerGoal.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, goals)
         binding.spinnerLevel.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, levels)
@@ -55,11 +49,11 @@ class GeneratorFragment : Fragment() {
     private fun generateWorkout() {
         val goal = binding.spinnerGoal.selectedItem.toString()
         val level = binding.spinnerLevel.selectedItem.toString()
-        val days = binding.spinnerDays.selectedItem.toString().toInt()
+        val days = binding.spinnerDays.selectedItem.toString().toIntOrNull() ?: 3
         val muscle = binding.spinnerMuscle.selectedItem.toString()
+        val uid = auth.currentUser?.uid ?: "anonymous"
 
         val exercises = getExercisesForPlan(goal, level, muscle)
-        val uid = auth.currentUser?.uid ?: "anonymous"
 
         val workoutPlan = hashMapOf(
             "userId" to uid,
@@ -74,24 +68,30 @@ class GeneratorFragment : Fragment() {
 
         db.collection("workouts").add(workoutPlan)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Workout plan generated!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.workout_generated), Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_generatorFragment_to_workoutFragment)
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error generating workout", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.error_generating), Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun getExercisesForPlan(goal: String, level: String, muscle: String): List<String> {
-        return when (muscle) {
-            "Full Body" -> listOf("Squats", "Push-ups", "Pull-ups", "Deadlift", "Plank", "Burpees")
-            "Upper Body" -> listOf("Push-ups", "Pull-ups", "Shoulder Press", "Bicep Curls", "Tricep Dips", "Bench Press")
-            "Lower Body" -> listOf("Squats", "Lunges", "Deadlift", "Leg Press", "Calf Raises", "Glute Bridges")
-            "Push" -> listOf("Bench Press", "Shoulder Press", "Push-ups", "Tricep Dips", "Lateral Raises")
-            "Pull" -> listOf("Pull-ups", "Rows", "Bicep Curls", "Face Pulls", "Lat Pulldown")
-            "Legs" -> listOf("Squats", "Lunges", "Leg Press", "Deadlift", "Leg Curls", "Calf Raises")
-            else -> listOf("Squats", "Push-ups", "Plank", "Burpees", "Jumping Jacks")
+    private fun getExercisesForPlan(goal: String, @Suppress("UNUSED_PARAMETER") level: String, muscle: String): List<String> {
+        val base = when (muscle) {
+            "Full Body" -> listOf("Barbell Squat", "Push-ups", "Pull-ups", "Deadlift", "Plank", "Burpees")
+            "Upper Body" -> listOf("Push-ups", "Pull-ups", "Overhead Press", "Bicep Curls", "Tricep Dips", "Bench Press")
+            "Lower Body" -> listOf("Barbell Squat", "Lunges", "Deadlift", "Leg Press", "Calf Raises", "Glute Bridges")
+            "Push" -> listOf("Bench Press", "Overhead Press", "Push-ups", "Tricep Dips", "Lateral Raises", "Incline Dumbbell Press")
+            "Pull" -> listOf("Pull-ups", "Barbell Rows", "Bicep Curls", "Face Pulls", "Lat Pulldown", "Cable Rows")
+            "Legs" -> listOf("Barbell Squat", "Lunges", "Leg Press", "Romanian Deadlift", "Leg Curl", "Calf Raises")
+            else -> listOf("Barbell Squat", "Push-ups", "Plank", "Burpees", "Jumping Jacks")
         }
+
+        return when (goal) {
+            "Lose Weight" -> base.takeLast(5) + listOf("Burpees")
+            "Increase Strength" -> base.take(5)
+            else -> base
+        }.distinct().take(6)
     }
 
     override fun onDestroyView() {

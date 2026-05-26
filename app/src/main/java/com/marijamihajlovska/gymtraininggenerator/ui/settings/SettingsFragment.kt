@@ -1,5 +1,6 @@
 package com.marijamihajlovska.gymtraininggenerator.ui.settings
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -32,28 +34,45 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         auth = FirebaseAuth.getInstance()
 
+        val prefs = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
+
+        val savedLang = prefs.getString("language", "en")
+        if (savedLang == "mk") binding.rbMacedonian.isChecked = true else binding.rbEnglish.isChecked = true
+
+        val savedTheme = prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        when (savedTheme) {
+            AppCompatDelegate.MODE_NIGHT_NO -> binding.rbThemeLight.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES -> binding.rbThemeDark.isChecked = true
+            else -> binding.rbThemeSystem.isChecked = true
+        }
+
         binding.btnSaveSettings.setOnClickListener {
-            val locale = if (binding.rbMacedonian.isChecked) {
-                Locale("mk")
-            } else {
-                Locale("en")
+            val lang = if (binding.rbMacedonian.isChecked) "mk" else "en"
+            val themeMode = when {
+                binding.rbThemeLight.isChecked -> AppCompatDelegate.MODE_NIGHT_NO
+                binding.rbThemeDark.isChecked -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             }
-            setLocale(locale)
-            Toast.makeText(requireContext(), "Settings saved!", Toast.LENGTH_SHORT).show()
+
+            prefs.edit().putString("language", lang).putInt("theme_mode", themeMode).apply()
+
+            AppCompatDelegate.setDefaultNightMode(themeMode)
+            setLocale(Locale(lang))
+            Toast.makeText(requireContext(), getString(R.string.settings_saved), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnDeleteAccount.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Delete Account")
-                .setMessage("Are you sure you want to delete your account?")
-                .setPositiveButton("Delete") { _, _ ->
+                .setTitle(getString(R.string.delete_account))
+                .setMessage(getString(R.string.delete_account_confirm))
+                .setPositiveButton(getString(R.string.delete)) { _, _ ->
                     auth.currentUser?.delete()?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
                         }
                     }
                 }
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(getString(R.string.cancel), null)
                 .show()
         }
     }

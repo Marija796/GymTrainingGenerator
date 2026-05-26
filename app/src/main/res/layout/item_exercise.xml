@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardExercise"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    android:layout_marginHorizontal="4dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Collapsed header row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,15 +23,15 @@
             android:padding="12dp"
             android:gravity="center_vertical">
 
-            <ImageView
-                android:id="@+id/ivExercise"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="fitCenter"
-                android:padding="8dp"
-                android:background="#FFF3E0"
-                android:src="@android:drawable/ic_menu_gallery"/>
+            <!-- Thumbnail (hidden when expanded) -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivThumbnail"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.App.Thumbnail"/>
 
+            <!-- Text info -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,61 +43,107 @@
                     android:id="@+id/tvExerciseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:textColor="#212121"/>
+                    android:textColor="@color/text_primary"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
                 <TextView
                     android:id="@+id/tvMuscles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#FF6500"
-                    android:layout_marginTop="4dp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <TextView
+                        android:id="@+id/tvDifficulty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="#FFFFFF"
+                        android:background="@drawable/bg_badge"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"/>
+
+                    <TextView
+                        android:id="@+id/tvEquipment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginStart="6dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Chevron -->
+            <ImageView
+                android:id="@+id/ivChevron"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/arrow_down_float"
+                android:layout_marginStart="8dp"
+                android:tint="@color/text_secondary"/>
+
+        </LinearLayout>
+
+        <!-- Expanded details (GONE by default) -->
+        <LinearLayout
+            android:id="@+id/layoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/card_gray"/>
+
+            <WebView
+                android:id="@+id/wvVideo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <TextView
                     android:id="@+id/tvSets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="#757575"
-                    android:layout_marginTop="4dp"/>
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingMultiplier="1.4"/>
 
             </LinearLayout>
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/arrow_down_float"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:background="#FFF8F5"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/ivGif"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                android:padding="8dp"
-                android:layout_marginBottom="12dp"/>
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#424242"
-                android:lineSpacingMultiplier="1.5"/>
 
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

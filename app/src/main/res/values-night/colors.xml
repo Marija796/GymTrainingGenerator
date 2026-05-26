@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF8C42</color>
+    <color name="colorPrimaryVariant">#FF6500</color>
+    <color name="colorPrimaryLight">#FFAB70</color>
+    <color name="colorSecondary">#FF8C42</color>
+    <color name="colorSecondaryVariant">#FF6500</color>
+    <color name="black">#FFFFFF</color>
+    <color name="dark_gray">#E0E0E0</color>
+    <color name="card_dark">#2C2C2C</color>
+    <color name="card_gray">#3A3A3A</color>
+    <color name="white">#1E1E1E</color>
+    <color name="text_primary">#EEEEEE</color>
+    <color name="text_secondary">#AAAAAA</color>
+    <color name="text_orange">#FFAB70</color>
+    <color name="accent">#FF8C42</color>
+    <color name="success">#66BB6A</color>
+    <color name="background">#121212</color>
+</resources>

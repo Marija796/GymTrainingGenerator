@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Gym Training Generator</string>
 
+    <!-- Facebook SDK placeholders — same as English -->
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
+
     <!-- Auth -->
     <string name="login">Најави се</string>
     <string name="register">Регистрирај се</string>
@@ -14,9 +19,17 @@
     <string name="have_account">Веќе имаш акаунт? Најави се</string>
     <string name="fill_all_fields">Пополни ги сите полиња</string>
     <string name="password_length">Лозинката мора да има најмалку 6 знаци</string>
+    <string name="login_failed">Најавата не успеа</string>
+    <string name="google_sign_in_failed">Најавата со Google не успеа</string>
+    <string name="anonymous_login_failed">Анонимната најава не успеа</string>
+    <string name="facebook_login_failed">Најавата со Facebook не успеа</string>
+    <string name="auth_failed">Автентикацијата не успеа</string>
+    <string name="welcome_back">Добредојде повторно!</string>
+    <string name="sign_in_subtitle">Најави се за да го продолжиш фитнес патот</string>
 
     <!-- Dashboard -->
     <string name="welcome">Добредојде!</string>
+    <string name="welcome_user">Добредојде, %s!</string>
     <string name="ready_to_train">Готов за тренинг денес?</string>
     <string name="generate_workout">Генерирај тренинг</string>
     <string name="create_plan">Креирај персонализиран тренинг план</string>
@@ -28,6 +41,7 @@
     <string name="see_past_workouts">Погледни ги минатите тренинзи</string>
     <string name="view_history">Погледни историја</string>
     <string name="logout">Одјави се</string>
+    <string name="quick_actions">Брзи акции</string>
 
     <!-- Generator -->
     <string name="fitness_goal">Фитнес цел</string>
@@ -36,12 +50,50 @@
     <string name="muscle_focus">Фокус на мускули</string>
     <string name="generate_plan">Генерирај мој тренинг план</string>
     <string name="workout_generated">Тренинг планот е генериран!</string>
+    <string name="generator_subtitle">Пополни ги преференциите за твојот план</string>
+    <string name="error_generating">Грешка при генерирање. Обиди се повторно.</string>
+
+    <!-- Spinner arrays — keep English for canonical Firestore values -->
+    <string-array name="fitness_goals">
+        <item>Lose Weight</item>
+        <item>Build Muscle</item>
+        <item>Stay Fit</item>
+        <item>Increase Strength</item>
+    </string-array>
+    <string-array name="fitness_levels">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+    <string-array name="training_days_options">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="muscle_focus_options">
+        <item>Full Body</item>
+        <item>Upper Body</item>
+        <item>Lower Body</item>
+        <item>Push</item>
+        <item>Pull</item>
+        <item>Legs</item>
+    </string-array>
 
     <!-- Workout -->
     <string name="your_workout_plan">Твојот тренинг план</string>
     <string name="mark_complete">Означи како завршен</string>
     <string name="back_to_dashboard">Назад на почетна</string>
     <string name="workout_completed">Тренингот е завршен! Браво!</string>
+    <string name="workout_already_completed">Веќе е завршен!</string>
+    <string name="plan_info">Цел: %1$s | Ниво: %2$s | Фокус: %3$s</string>
+
+    <!-- History -->
+    <string name="no_history">Сè уште нема тренинзи. Генерирај го твојот прв план!</string>
+    <string name="status_completed">Завршен</string>
+    <string name="status_in_progress">Во тек</string>
+    <string name="history_item_format">%1$s — %2$s</string>
 
     <!-- Profile -->
     <string name="my_profile">Мој профил</string>
@@ -50,22 +102,35 @@
     <string name="weight_kg">Тежина (kg)</string>
     <string name="save_profile">Зачувај профил</string>
     <string name="profile_saved">Профилот е зачуван!</string>
+    <string name="profile_subtitle">Ажурирај ги податоците за подобри планови</string>
 
     <!-- Progress -->
     <string name="total_workouts">Вкупно тренинзи</string>
-    <string name="completed_workouts">Завршени тренинзи</string>
+    <string name="completed_workouts">Завршени</string>
     <string name="favorite_goal">Омилена цел</string>
+    <string name="progress_subtitle">Твоите фитнес статистики</string>
+    <string name="no_data">—</string>
 
     <!-- Settings -->
     <string name="settings">Поставки</string>
     <string name="language">Јазик</string>
+    <string name="dark_mode">Темен режим</string>
+    <string name="theme_system">Системски</string>
+    <string name="theme_light">Светол</string>
+    <string name="theme_dark">Темен</string>
     <string name="save_settings">Зачувај поставки</string>
     <string name="delete_account">Избриши акаунт</string>
-    <string name="delete_account_confirm">Дали сте сигурни дека сакате да го избришете акаунтот?</string>
+    <string name="delete_account_confirm">Дали сте сигурни дека сакате да го избришете акаунтот? Ова не може да се врати.</string>
     <string name="delete">Избриши</string>
     <string name="cancel">Откажи</string>
     <string name="settings_saved">Поставките се зачувани!</string>
 
     <!-- Exercises -->
     <string name="exercise_library">Библиотека на вежби</string>
+    <string name="search_exercises">Пребарај вежби, мускули…</string>
+    <string name="category_all">Сите</string>
+    <string name="tap_to_expand">Допри картичка за да го видиш видеото</string>
+
+    <!-- Athlete placeholder name -->
+    <string name="default_athlete_name">Атлет</string>
 </resources>

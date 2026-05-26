@@ -16,9 +16,7 @@ class DashboardFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
@@ -29,23 +27,24 @@ class DashboardFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         val user = auth.currentUser
-        if (user != null) {
-            val name = user.displayName ?: user.email ?: "Athlete"
-            binding.tvWelcome.text = "Welcome, $name!"
-        }
+        val name = user?.displayName ?: user?.email ?: getString(R.string.default_athlete_name)
+        binding.tvWelcome.text = getString(R.string.welcome_user, name)
 
         binding.btnGenerate.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_generatorFragment)
         }
-
         binding.btnProgress.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_progressFragment)
         }
-
         binding.btnHistory.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardFragment_to_historyFragment)
         }
-
+        binding.btnSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_settingsFragment)
+        }
+        binding.btnProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
+        }
         binding.btnLogout.setOnClickListener {
             auth.signOut()
             findNavController().navigate(R.id.action_dashboardFragment_to_loginFragment)

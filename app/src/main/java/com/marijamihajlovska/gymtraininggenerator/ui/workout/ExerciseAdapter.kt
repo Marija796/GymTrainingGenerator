@@ -11,17 +11,19 @@ class ExerciseAdapter(private val exercises: List<String>) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvExercise: TextView = itemView.findViewById(R.id.tvExerciseName)
+        val tvNumber: TextView = itemView.findViewById(R.id.tvWorkoutExerciseNumber)
+        val tvName: TextView = itemView.findViewById(R.id.tvWorkoutExerciseName)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_exercise, parent, false)
+            .inflate(R.layout.item_workout_exercise, parent, false)
         return ExerciseViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.tvExercise.text = "${position + 1}. ${exercises[position]}"
+        holder.tvNumber.text = "${position + 1}"
+        holder.tvName.text = exercises[position]
     }
 
     override fun getItemCount() = exercises.size
