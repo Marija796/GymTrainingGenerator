@@ -3,17 +3,18 @@ package com.marijamihajlovska.gymtraininggenerator.ui.exercises
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.CookieManager
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.android.material.imageview.ShapeableImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.marijamihajlovska.gymtraininggenerator.R
 import com.marijamihajlovska.gymtraininggenerator.model.ExerciseItem
 
@@ -29,7 +30,7 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ivThumbnail: ShapeableImageView = view.findViewById(R.id.ivThumbnail)
+        val ivThumbnail: ImageView = view.findViewById(R.id.ivThumbnail)
         val tvName: TextView = view.findViewById(R.id.tvExerciseName)
         val tvMuscles: TextView = view.findViewById(R.id.tvMuscles)
         val tvEquipment: TextView = view.findViewById(R.id.tvEquipment)
@@ -43,10 +44,13 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
         init {
             wvVideo.settings.apply {
                 javaScriptEnabled = true
+                domStorageEnabled = true
                 mediaPlaybackRequiresUserGesture = false
                 loadWithOverviewMode = true
                 useWideViewPort = true
             }
+            CookieManager.getInstance().setAcceptCookie(true)
+            CookieManager.getInstance().setAcceptThirdPartyCookies(wvVideo, true)
             wvVideo.webChromeClient = WebChromeClient()
             wvVideo.webViewClient = WebViewClient()
         }
@@ -69,11 +73,18 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
         holder.tvSets.text = "${exercise.sets} sets · ${exercise.reps} reps · ${exercise.restSeconds}s rest"
         holder.tvDescription.text = exercise.description
 
+        val fallbackUrl = exercise.imageUrl.replace("/hqdefault.jpg", "/0.jpg")
         Glide.with(holder.itemView.context)
             .load(exercise.imageUrl)
+            .error(
+                Glide.with(holder.itemView.context)
+                    .load(fallbackUrl)
+                    .transform(RoundedCorners(16))
+                    .error(R.drawable.baseline_fitness_center_24)
+            )
+            .transform(RoundedCorners(16))
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .placeholder(R.drawable.baseline_fitness_center_24)
-            .error(R.drawable.baseline_fitness_center_24)
             .into(holder.ivThumbnail)
 
         holder.layoutDetails.visibility = if (isExpanded) View.VISIBLE else View.GONE
@@ -81,13 +92,7 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
         holder.ivChevron.rotation = if (isExpanded) 180f else 0f
 
         if (isExpanded) {
-            holder.wvVideo.loadData(
-                "<html><body style='margin:0;padding:0;background:#000'>" +
-                "<iframe width='100%' height='100%' src='${exercise.videoUrl}?autoplay=1&mute=1&rel=0' " +
-                "frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>" +
-                "</body></html>",
-                "text/html", "utf-8"
-            )
+            holder.wvVideo.loadUrl("${exercise.videoUrl}?autoplay=1&mute=1&rel=0&playsinline=1")
         } else {
             holder.wvVideo.loadUrl("about:blank")
         }
