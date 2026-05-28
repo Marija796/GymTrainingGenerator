@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.marijamihajlovska.gymtraininggenerator.R
+import com.marijamihajlovska.gymtraininggenerator.data.local.AppDatabase
+import com.marijamihajlovska.gymtraininggenerator.data.local.WorkoutEntity
 import com.marijamihajlovska.gymtraininggenerator.databinding.FragmentHistoryBinding
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -42,39 +46,58 @@ class HistoryFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
-        loadHistory()
-    }
 
-    private fun loadHistory() {
-        val uid = auth.currentUser?.uid ?: run {
-            _binding?.tvEmptyHistory?.visibility = View.VISIBLE
+        val uid = auth.currentUser?.uid
+        if (uid == null) {
+            binding.tvEmptyHistory.visibility = View.VISIBLE
             return
         }
+
+        val workoutDao = AppDatabase.getDatabase(requireContext()).workoutDao()
+
+        // Observe Room LiveData — drives the RecyclerView
+        workoutDao.getWorkoutsByUser(uid).observe(viewLifecycleOwner) { entities ->
+            val b = _binding ?: return@observe
+            if (entities.isEmpty()) {
+                b.tvEmptyHistory.visibility = View.VISIBLE
+                b.rvHistory.visibility = View.GONE
+            } else {
+                b.tvEmptyHistory.visibility = View.GONE
+                b.rvHistory.visibility = View.VISIBLE
+                val items = entities.map { e ->
+                    HistoryItem(
+                        goal = e.goal,
+                        muscleFocus = e.muscleFocus,
+                        date = e.date,
+                        completed = e.completed
+                    )
+                }
+                b.rvHistory.adapter = HistoryAdapter(items)
+            }
+        }
+
+        // Sync from Firestore → Room so data is always current
         db.collection("workouts")
             .whereEqualTo("userId", uid)
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { documents ->
-                val b = _binding ?: return@addOnSuccessListener
-                val items = documents.mapNotNull { doc ->
-                    HistoryItem(
-                        goal = doc.getString("goal") ?: return@mapNotNull null,
-                        muscleFocus = doc.getString("muscleFocus") ?: "",
-                        date = doc.getLong("date") ?: 0L,
-                        completed = doc.getBoolean("completed") ?: false
-                    )
+                lifecycleScope.launch {
+                    for (doc in documents) {
+                        val exercises = (doc.get("exercises") as? List<*>)?.joinToString(",") ?: ""
+                        val entity = WorkoutEntity(
+                            firestoreId = doc.id,
+                            userId = uid,
+                            goal = doc.getString("goal") ?: "",
+                            level = doc.getString("level") ?: "",
+                            muscleFocus = doc.getString("muscleFocus") ?: "",
+                            exercises = exercises,
+                            date = doc.getLong("date") ?: 0L,
+                            completed = doc.getBoolean("completed") ?: false
+                        )
+                        workoutDao.insertWorkout(entity)
+                    }
                 }
-                if (items.isEmpty()) {
-                    b.tvEmptyHistory.visibility = View.VISIBLE
-                    b.rvHistory.visibility = View.GONE
-                } else {
-                    b.tvEmptyHistory.visibility = View.GONE
-                    b.rvHistory.visibility = View.VISIBLE
-                    b.rvHistory.adapter = HistoryAdapter(items)
-                }
-            }
-            .addOnFailureListener {
-                _binding?.tvEmptyHistory?.visibility = View.VISIBLE
             }
     }
 

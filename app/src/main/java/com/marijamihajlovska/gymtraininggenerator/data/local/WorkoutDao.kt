@@ -17,6 +17,9 @@ interface WorkoutDao {
     @Delete
     suspend fun deleteWorkout(workout: WorkoutEntity)
 
-    @Query("SELECT * FROM workouts WHERE id = :id")
-    suspend fun getWorkoutById(id: Int): WorkoutEntity?
+    @Query("SELECT * FROM workouts WHERE firestoreId = :firestoreId")
+    suspend fun getWorkoutById(firestoreId: String): WorkoutEntity?
+
+    @Query("UPDATE workouts SET completed = 1 WHERE firestoreId = :id")
+    suspend fun markComplete(id: String)
 }

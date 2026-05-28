@@ -5,10 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "workouts")
 data class WorkoutEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val name: String,
+    @PrimaryKey
+    val firestoreId: String,
     val userId: String,
+    val goal: String,
+    val level: String,
+    val muscleFocus: String,
     val exercises: String,
     val date: Long = System.currentTimeMillis(),
     val completed: Boolean = false

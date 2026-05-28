@@ -10,10 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bg_header_orange"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp"
-        android:paddingBottom="28dp"
+        android:paddingBottom="32dp"
         android:orientation="vertical">
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/generator_subtitle"
             android:textSize="13sp"
-            android:textColor="#FFFDE0"
+            android:textColor="#FFFFFFB3"
             android:layout_marginTop="4dp"/>
 
     </LinearLayout>
@@ -37,7 +37,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginTop="-8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,81 +47,93 @@
             android:padding="16dp">
 
             <!-- Goal -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fitness_goal"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginBottom="6dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerGoal"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_spinner"
-                android:paddingHorizontal="12dp"
-                android:layout_marginBottom="14dp"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/fitness_goal"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginBottom="14dp">
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:inputType="none"
+                    android:paddingHorizontal="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Level -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fitness_level"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginBottom="6dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerLevel"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_spinner"
-                android:paddingHorizontal="12dp"
-                android:layout_marginBottom="14dp"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/fitness_level"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginBottom="14dp">
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:inputType="none"
+                    android:paddingHorizontal="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Days -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/training_days"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginBottom="6dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerDays"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_spinner"
-                android:paddingHorizontal="12dp"
-                android:layout_marginBottom="14dp"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/training_days"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginBottom="14dp">
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:inputType="none"
+                    android:paddingHorizontal="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Muscle focus -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/muscle_focus"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:layout_marginBottom="6dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerMuscle"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/bg_spinner"
-                android:paddingHorizontal="12dp"
-                android:layout_marginBottom="24dp"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/muscle_focus"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginBottom="24dp">
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerMuscle"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:inputType="none"
+                    android:paddingHorizontal="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnGenerate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
                 android:text="@string/generate_plan"/>
 
         </LinearLayout>

@@ -19,4 +19,11 @@
     <color name="accent">#FF6500</color>
     <color name="success">#4CAF50</color>
     <color name="background">#F5F5F5</color>
+    <color name="login_header_bg">#1A1A1A</color>
+    <color name="google_btn_bg">#FFFFFF</color>
+    <color name="facebook_blue">#1877F2</color>
+    <color name="divider_color">#E0E0E0</color>
+    <color name="hint_color">#9E9E9E</color>
+    <color name="colorError">#B00020</color>
+    <color name="colorLoginAccent">#FF6B35</color>
 </resources>

@@ -10,16 +10,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Orange header with welcome + settings icon -->
+        <!-- Orange header with curved bottom -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/bg_header_orange"
             android:paddingStart="20dp"
             android:paddingEnd="12dp"
             android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:paddingBottom="32dp"
             android:gravity="center_vertical">
 
             <LinearLayout
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ready_to_train"
                     android:textSize="13sp"
-                    android:textColor="#FFFDE0"
+                    android:textColor="#FFFFFFB3"
                     android:layout_marginTop="4dp"/>
 
             </LinearLayout>
@@ -63,15 +63,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:layout_marginTop="-8dp">
 
             <!-- Generate workout card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -88,11 +89,11 @@
                         android:layout_marginBottom="8dp">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:src="@drawable/baseline_fitness_center_24"
                             android:background="@drawable/bg_badge"
-                            android:padding="7dp"
+                            android:padding="10dp"
                             android:tint="#FFFFFF"/>
 
                         <TextView
@@ -103,7 +104,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="14dp"/>
 
                     </LinearLayout>
 
@@ -113,12 +114,12 @@
                         android:text="@string/create_plan"
                         android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginBottom="14dp"/>
 
                     <Button
                         android:id="@+id/btnGenerate"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="42dp"
                         android:text="@string/start_generator"
                         android:textSize="13sp"/>
 
@@ -131,8 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -149,11 +150,11 @@
                         android:layout_marginBottom="8dp">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:src="@drawable/baseline_bar_chart_24"
                             android:background="@drawable/bg_badge"
-                            android:padding="7dp"
+                            android:padding="10dp"
                             android:tint="#FFFFFF"/>
 
                         <TextView
@@ -164,7 +165,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="14dp"/>
 
                     </LinearLayout>
 
@@ -174,12 +175,12 @@
                         android:text="@string/track_journey"
                         android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginBottom="14dp"/>
 
                     <Button
                         android:id="@+id/btnProgress"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="42dp"
                         android:text="@string/view_progress"
                         android:textSize="13sp"/>
 
@@ -192,8 +193,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -210,11 +211,11 @@
                         android:layout_marginBottom="8dp">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:src="@drawable/baseline_history_24"
                             android:background="@drawable/bg_badge"
-                            android:padding="7dp"
+                            android:padding="10dp"
                             android:tint="#FFFFFF"/>
 
                         <TextView
@@ -225,7 +226,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="14dp"/>
 
                     </LinearLayout>
 
@@ -235,12 +236,12 @@
                         android:text="@string/see_past_workouts"
                         android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginBottom="14dp"/>
 
                     <Button
                         android:id="@+id/btnHistory"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="42dp"
                         android:text="@string/view_history"
                         android:textSize="13sp"/>
 
@@ -252,9 +253,9 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -271,11 +272,11 @@
                         android:layout_marginBottom="8dp">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
                             android:src="@drawable/baseline_person_24"
                             android:background="@drawable/bg_badge"
-                            android:padding="7dp"
+                            android:padding="10dp"
                             android:tint="#FFFFFF"/>
 
                         <TextView
@@ -286,7 +287,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"
-                            android:layout_marginStart="12dp"/>
+                            android:layout_marginStart="14dp"/>
 
                     </LinearLayout>
 
@@ -296,13 +297,13 @@
                         android:text="@string/profile_subtitle"
                         android:textSize="13sp"
                         android:textColor="@color/text_secondary"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginBottom="14dp"/>
 
                     <Button
                         android:id="@+id/btnProfile"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:text="@string/save_profile"
+                        android:layout_height="42dp"
+                        android:text="@string/my_profile"
                         android:textSize="13sp"/>
 
                 </LinearLayout>

@@ -11,7 +11,7 @@
     <string name="register">Регистрирај се</string>
     <string name="email">Е-пошта</string>
     <string name="password">Лозинка</string>
-    <string name="full_name">Целосно ime</string>
+    <string name="full_name">Целосно Име</string>
     <string name="login_with_google">Најави се со Google</string>
     <string name="login_with_facebook">Најави се со Facebook</string>
     <string name="continue_as_guest">Продолжи како гостин</string>
@@ -24,8 +24,19 @@
     <string name="anonymous_login_failed">Анонимната најава не успеа</string>
     <string name="facebook_login_failed">Најавата со Facebook не успеа</string>
     <string name="auth_failed">Автентикацијата не успеа</string>
-    <string name="welcome_back">Добредојде повторно!</string>
+    <string name="welcome_back">Добредојде!</string>
     <string name="sign_in_subtitle">Најави се за да го продолжиш фитнес патот</string>
+    <string name="forgot_password">Заборавена лозинка?</string>
+    <string name="invalid_email">Невалидна е-пошта</string>
+    <string name="enter_email_for_reset">Внеси е-пошта за ресетирање на лозинката</string>
+    <string name="reset_email_sent">Е-пошта за ресетирање е испратена</string>
+    <string name="reset_email_failed">Неуспешно испраќање на е-пошта</string>
+    <string name="sign_up_title">Создај акаунт</string>
+    <string name="sign_up_subtitle">Придружи се и започни со фитнес патот</string>
+    <string name="or_divider">ИЛИ</string>
+    <string name="continue_with_google">Продолжи со Google</string>
+    <string name="continue_with_facebook">Продолжи со Facebook</string>
+    <string name="app_tagline">Твојот личен фитнес придружник</string>
 
     <!-- Dashboard -->
     <string name="welcome">Добредојде!</string>
@@ -111,10 +122,24 @@
     <string name="progress_subtitle">Твоите фитнес статистики</string>
     <string name="no_data">—</string>
 
+    <!-- Auth (additional) -->
+    <string name="registration_failed">Регистрацијата не успеа: %s</string>
+    <string name="error_saving_profile">Грешка при зачувување на профилот</string>
+
+    <!-- Splash -->
+    <string name="splash_gym">ТЕРЕТАНА</string>
+    <string name="splash_subtitle">ГЕНЕРАТОР НА ТРЕНИНГ</string>
+    <string name="splash_footer">Поврзано со Firebase</string>
+
+    <!-- Language names -->
+    <string name="language_english">Англиски</string>
+    <string name="language_macedonian">Македонски</string>
+
     <!-- Settings -->
     <string name="settings">Поставки</string>
+    <string name="settings_subtitle">Управувај со твоите поставки</string>
     <string name="language">Јазик</string>
-    <string name="dark_mode">Темен режим</string>
+    <string name="dark_mode">Режим</string>
     <string name="theme_system">Системски</string>
     <string name="theme_light">Светол</string>
     <string name="theme_dark">Темен</string>

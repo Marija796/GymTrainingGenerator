@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.marijamihajlovska.gymtraininggenerator.R
 import com.marijamihajlovska.gymtraininggenerator.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -44,9 +46,18 @@ class ProfileFragment : Fragment() {
         val levels = listOf("Beginner", "Intermediate", "Advanced")
         val days = listOf("2", "3", "4", "5", "6")
 
-        binding.spinnerGoal.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, goals)
-        binding.spinnerLevel.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, levels)
-        binding.spinnerDays.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, days)
+        (binding.spinnerGoal as AutoCompleteTextView).apply {
+            setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, goals))
+            setText(goals[0], false)
+        }
+        (binding.spinnerLevel as AutoCompleteTextView).apply {
+            setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, levels))
+            setText(levels[0], false)
+        }
+        (binding.spinnerDays as AutoCompleteTextView).apply {
+            setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, days))
+            setText(days[1], false)
+        }
     }
 
     private fun loadProfile() {
@@ -68,12 +79,12 @@ class ProfileFragment : Fragment() {
         val age = binding.etAge.text.toString().trim()
         val height = binding.etHeight.text.toString().trim()
         val weight = binding.etWeight.text.toString().trim()
-        val goal = binding.spinnerGoal.selectedItem.toString()
-        val level = binding.spinnerLevel.selectedItem.toString()
-        val days = binding.spinnerDays.selectedItem.toString().toInt()
+        val goal = (binding.spinnerGoal as AutoCompleteTextView).text.toString()
+        val level = (binding.spinnerLevel as AutoCompleteTextView).text.toString()
+        val days = (binding.spinnerDays as AutoCompleteTextView).text.toString().toIntOrNull() ?: 3
 
         if (name.isEmpty() || age.isEmpty() || height.isEmpty() || weight.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.fill_all_fields), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -90,10 +101,10 @@ class ProfileFragment : Fragment() {
 
         db.collection("users").document(uid).set(user)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Profile saved!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.profile_saved), Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error saving profile", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.error_saving_profile), Toast.LENGTH_SHORT).show()
             }
     }
 

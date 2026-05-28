@@ -25,8 +25,19 @@
     <string name="anonymous_login_failed">Anonymous login failed</string>
     <string name="facebook_login_failed">Facebook login failed</string>
     <string name="auth_failed">Authentication failed</string>
-    <string name="welcome_back">Welcome back!</string>
+    <string name="welcome_back">Welcome!</string>
     <string name="sign_in_subtitle">Sign in to continue your fitness journey</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="enter_email_for_reset">Enter your email to reset password</string>
+    <string name="reset_email_sent">Password reset email sent</string>
+    <string name="reset_email_failed">Failed to send reset email</string>
+    <string name="sign_up_title">Create Account</string>
+    <string name="sign_up_subtitle">Join us and start your fitness journey</string>
+    <string name="or_divider">OR</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="app_tagline">Your personal fitness companion</string>
 
     <!-- Dashboard -->
     <string name="welcome">Welcome!</string>
@@ -112,10 +123,24 @@
     <string name="progress_subtitle">Your fitness stats</string>
     <string name="no_data">—</string>
 
+    <!-- Auth (additional) -->
+    <string name="registration_failed">Registration failed: %s</string>
+    <string name="error_saving_profile">Error saving profile</string>
+
+    <!-- Splash -->
+    <string name="splash_gym">GYM</string>
+    <string name="splash_subtitle">TRAINING GENERATOR</string>
+    <string name="splash_footer">Powered by Firebase</string>
+
+    <!-- Language names -->
+    <string name="language_english">English</string>
+    <string name="language_macedonian">Macedonian</string>
+
     <!-- Settings -->
     <string name="settings">Settings</string>
+    <string name="settings_subtitle">Manage your preferences</string>
     <string name="language">Language</string>
-    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode">Mode</string>
     <string name="theme_system">System default</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>

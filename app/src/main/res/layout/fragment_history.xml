@@ -9,10 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bg_header_orange"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp"
-        android:paddingBottom="28dp">
+        android:paddingBottom="32dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,6 +22,14 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_past_workouts"
+            android:textSize="13sp"
+            android:textColor="#FFFFFFB3"
+            android:layout_marginTop="4dp"/>
 
     </LinearLayout>
 
