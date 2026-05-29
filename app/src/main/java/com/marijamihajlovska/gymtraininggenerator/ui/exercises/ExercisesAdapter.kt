@@ -92,8 +92,15 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
         holder.ivChevron.rotation = if (isExpanded) 180f else 0f
 
         if (isExpanded) {
-            holder.wvVideo.loadUrl("${exercise.videoUrl}?autoplay=1&mute=1&rel=0&playsinline=1")
+            if (exercise.videoUrl.isNotBlank()) {
+                holder.wvVideo.visibility = View.VISIBLE
+                holder.wvVideo.loadUrl("${exercise.videoUrl}?autoplay=1&mute=1&rel=0&playsinline=1")
+            } else {
+                holder.wvVideo.visibility = View.GONE
+                holder.wvVideo.loadUrl("about:blank")
+            }
         } else {
+            holder.wvVideo.visibility = View.VISIBLE
             holder.wvVideo.loadUrl("about:blank")
         }
 

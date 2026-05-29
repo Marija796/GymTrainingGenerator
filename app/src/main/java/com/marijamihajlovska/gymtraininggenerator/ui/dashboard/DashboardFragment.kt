@@ -1,11 +1,20 @@
 package com.marijamihajlovska.gymtraininggenerator.ui.dashboard
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.marijamihajlovska.gymtraininggenerator.R
 import com.marijamihajlovska.gymtraininggenerator.databinding.FragmentDashboardBinding
@@ -14,6 +23,17 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
+
+    private val locationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true) {
+            openNearbyGyms()
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -47,7 +67,59 @@ class DashboardFragment : Fragment() {
         }
         binding.btnLogout.setOnClickListener {
             auth.signOut()
-            findNavController().navigate(R.id.action_dashboardFragment_to_loginFragment)
+            findNavController().navigate(
+                R.id.action_dashboardFragment_to_loginFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.nav_graph, true).build()
+            )
+        }
+        binding.btnNearbyGyms?.setOnClickListener {
+            checkLocationAndOpenGyms()
+        }
+    }
+
+    private fun checkLocationAndOpenGyms() {
+        val fine = Manifest.permission.ACCESS_FINE_LOCATION
+        val coarse = Manifest.permission.ACCESS_COARSE_LOCATION
+        val hasFine = ContextCompat.checkSelfPermission(requireContext(), fine) == PackageManager.PERMISSION_GRANTED
+        val hasCoarse = ContextCompat.checkSelfPermission(requireContext(), coarse) == PackageManager.PERMISSION_GRANTED
+
+        if (hasFine || hasCoarse) {
+            openNearbyGyms()
+        } else {
+            locationPermissionLauncher.launch(arrayOf(fine, coarse))
+        }
+    }
+
+    private fun openNearbyGyms() {
+        val fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        try {
+            fusedClient.lastLocation.addOnSuccessListener { location ->
+                if (!isAdded) return@addOnSuccessListener
+                val mapsIntent = if (location != null) {
+                    Intent(Intent.ACTION_VIEW, Uri.parse("geo:${location.latitude},${location.longitude}?q=gyms+near+me"))
+                        .apply { setPackage("com.google.android.apps.maps") }
+                } else {
+                    Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=gyms+near+me"))
+                        .apply { setPackage("com.google.android.apps.maps") }
+                }
+                try {
+                    startActivity(mapsIntent)
+                } catch (e: Exception) {
+                    val webUri = if (location != null) {
+                        Uri.parse("https://www.google.com/maps/search/gyms/@${location.latitude},${location.longitude},14z")
+                    } else {
+                        Uri.parse("https://www.google.com/maps/search/gyms+near+me")
+                    }
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, webUri))
+                    } catch (e2: Exception) {
+                        Toast.makeText(requireContext(), getString(R.string.maps_unavailable), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Toast.makeText(requireContext(), getString(R.string.location_permission_denied), Toast.LENGTH_SHORT).show()
         }
     }
 

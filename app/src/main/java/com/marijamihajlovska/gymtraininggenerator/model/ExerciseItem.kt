@@ -23,7 +23,8 @@ enum class ExerciseCategory(val displayName: String) {
     LEGS("Legs"),
     CORE("Core"),
     CARDIO("Cardio"),
-    FULL_BODY("Full Body")
+    FULL_BODY("Full Body"),
+    PLUS_EXERCISES("Plus Exercises")
 }
 
 enum class Difficulty(val displayName: String) {

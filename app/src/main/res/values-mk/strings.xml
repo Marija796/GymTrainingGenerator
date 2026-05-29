@@ -140,7 +140,9 @@
     <string name="settings_subtitle">Управувај со твоите поставки</string>
     <string name="language">Јазик</string>
     <string name="dark_mode">Режим</string>
-    <string name="theme_system">Системски</string>
+    <string name="theme_system">Автоматски</string>
+    <string name="language_label">Јазик</string>
+    <string name="mode_label">Режим</string>
     <string name="theme_light">Светол</string>
     <string name="theme_dark">Темен</string>
     <string name="save_settings">Зачувај поставки</string>
@@ -158,4 +160,28 @@
 
     <!-- Athlete placeholder name -->
     <string name="default_athlete_name">Атлет</string>
+
+    <!-- Step counter -->
+    <string name="today_steps">Чекори денес</string>
+    <string name="sensor_unavailable">Сензорот за чекори не е достапен</string>
+
+    <!-- GPS / Nearby gyms -->
+    <string name="nearby_gyms">Пронајди теретани</string>
+    <string name="nearby_gyms_subtitle">Откријте теретани во близина</string>
+    <string name="find_gyms">Пронајди теретани</string>
+    <string name="location_permission_denied">Потребна е дозвола за локација за пронаоѓање теретани</string>
+    <string name="maps_unavailable">Апликацијата Карти не е достапна</string>
+
+    <!-- Plus Exercises (wger API) -->
+    <string name="loading_exercises">Се вчитуваат вежби…</string>
+    <string name="exercises_load_error">Не може да се вчитаат вежбите. Провери ја врската.</string>
+
+    <!-- Step counter permission -->
+    <string name="step_permission_denied">Потребна е дозвола за препознавање активност</string>
+
+    <!-- Step statistics -->
+    <string name="step_statistics">Историја на чекори</string>
+    <string name="no_step_data">Сè уште нема историја на чекори. Продолжи да одиш!</string>
+    <string name="avg_steps_per_day">Просек: %d чекори/ден</string>
+    <string name="steps_count">%,d чекори</string>
 </resources>

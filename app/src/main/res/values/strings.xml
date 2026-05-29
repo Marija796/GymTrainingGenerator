@@ -141,7 +141,9 @@
     <string name="settings_subtitle">Manage your preferences</string>
     <string name="language">Language</string>
     <string name="dark_mode">Mode</string>
-    <string name="theme_system">System default</string>
+    <string name="theme_system">Automatic</string>
+    <string name="language_label">Language</string>
+    <string name="mode_label">Mode</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="save_settings">Save Settings</string>
@@ -159,4 +161,28 @@
 
     <!-- Athlete placeholder name -->
     <string name="default_athlete_name">Athlete</string>
+
+    <!-- Step counter -->
+    <string name="today_steps">Today\'s Steps</string>
+    <string name="sensor_unavailable">Step sensor not available</string>
+
+    <!-- GPS / Nearby gyms -->
+    <string name="nearby_gyms">Find Nearby Gyms</string>
+    <string name="nearby_gyms_subtitle">Discover gyms close to your location</string>
+    <string name="find_gyms">Find Gyms</string>
+    <string name="location_permission_denied">Location permission is required to find nearby gyms</string>
+    <string name="maps_unavailable">Maps app not available</string>
+
+    <!-- Plus Exercises (wger API) -->
+    <string name="loading_exercises">Loading exercises…</string>
+    <string name="exercises_load_error">Could not load exercises. Check your connection.</string>
+
+    <!-- Step counter permission -->
+    <string name="step_permission_denied">Activity Recognition permission required for step counting</string>
+
+    <!-- Step statistics -->
+    <string name="step_statistics">Step History</string>
+    <string name="no_step_data">No step history yet. Keep walking!</string>
+    <string name="avg_steps_per_day">Avg: %d steps/day</string>
+    <string name="steps_count">%,d steps</string>
 </resources>

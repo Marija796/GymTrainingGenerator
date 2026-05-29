@@ -1,7 +1,9 @@
 package com.marijamihajlovska.gymtraininggenerator.auth
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -9,10 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.marijamihajlovska.gymtraininggenerator.databinding.DialogLoginSettingsBinding
+import java.util.Locale
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -22,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import androidx.navigation.NavOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -63,14 +70,11 @@ class LoginFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         analytics = FirebaseAnalytics.getInstance(requireContext())
 
-        if (auth.currentUser != null) {
-            findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
-            return
-        }
-
         setupGoogleSignIn()
         setupFacebookSignIn()
         setupEmailValidation()
+
+        binding.btnLoginSettings.setOnClickListener { showSettingsDialog() }
 
         binding.btnLogin.setOnClickListener { handleEmailLogin() }
         binding.tvForgotPassword.setOnClickListener { handleForgotPassword() }
@@ -89,6 +93,58 @@ class LoginFragment : Fragment() {
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+    }
+
+    private fun showSettingsDialog() {
+        val prefs = requireContext().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val dialogBinding = DialogLoginSettingsBinding.inflate(layoutInflater)
+
+        // Restore current language selection
+        if (prefs.getString("language", "en") == "mk") {
+            dialogBinding.chipMk.isChecked = true
+        } else {
+            dialogBinding.chipEn.isChecked = true
+        }
+
+        // Restore current mode selection
+        when (prefs.getInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)) {
+            AppCompatDelegate.MODE_NIGHT_NO -> dialogBinding.chipModeLight.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES -> dialogBinding.chipModeDark.isChecked = true
+            else -> dialogBinding.chipModeAuto.isChecked = true
+        }
+
+        // Mode changes apply immediately
+        dialogBinding.chipModeAuto.setOnClickListener {
+            prefs.edit().putInt("theme_mode", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM).apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        }
+        dialogBinding.chipModeLight.setOnClickListener {
+            prefs.edit().putInt("theme_mode", AppCompatDelegate.MODE_NIGHT_NO).apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        dialogBinding.chipModeDark.setOnClickListener {
+            prefs.edit().putInt("theme_mode", AppCompatDelegate.MODE_NIGHT_YES).apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogBinding.root)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                // Apply language on dismiss if changed
+                val lang = if (dialogBinding.chipMk.isChecked) "mk" else "en"
+                val current = prefs.getString("language", "en")
+                if (lang != current) {
+                    prefs.edit().putString("language", lang).apply()
+                    val locale = Locale(lang)
+                    Locale.setDefault(locale)
+                    val config = Configuration(resources.configuration)
+                    config.setLocale(locale)
+                    @Suppress("DEPRECATION")
+                    resources.updateConfiguration(config, resources.displayMetrics)
+                    requireActivity().recreate()
+                }
+            }
+            .show()
     }
 
     private fun setupEmailValidation() {
@@ -218,7 +274,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToDashboard() {
-        findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+        findNavController().navigate(
+            R.id.action_loginFragment_to_dashboardFragment,
+            null,
+            NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+        )
     }
 
     @Suppress("OVERRIDE_DEPRECATION")

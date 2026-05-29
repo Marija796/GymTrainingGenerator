@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
@@ -62,7 +63,11 @@ class RegisterFragment : Fragment() {
                             .addOnSuccessListener {
                                 FirebaseAnalytics.getInstance(requireContext())
                                     .logEvent(FirebaseAnalytics.Event.SIGN_UP, bundleOf("method" to "email"))
-                                findNavController().navigate(R.id.action_registerFragment_to_dashboardFragment)
+                                findNavController().navigate(
+                                    R.id.action_registerFragment_to_dashboardFragment,
+                                    null,
+                                    NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+                                )
                             }
                     } else {
                         Toast.makeText(requireContext(), getString(R.string.registration_failed, task.exception?.message ?: ""), Toast.LENGTH_SHORT).show()
@@ -71,7 +76,11 @@ class RegisterFragment : Fragment() {
         }
 
         binding.tvLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            findNavController().navigate(
+                R.id.action_registerFragment_to_loginFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.loginFragment, false).build()
+            )
         }
     }
 

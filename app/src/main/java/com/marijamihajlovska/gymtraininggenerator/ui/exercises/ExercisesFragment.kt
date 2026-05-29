@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +37,8 @@ class ExercisesFragment : Fragment() {
         setupCategoryChips()
         setupSearch()
         observeExercises()
+        observeLoading()
+        observeError()
     }
 
     private fun setupRecyclerView() {
@@ -80,6 +83,24 @@ class ExercisesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.exercises.collect { exercises ->
                 adapter.submitList(exercises)
+            }
+        }
+    }
+
+    private fun observeLoading() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isLoading.collect { loading ->
+                binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+            }
+        }
+    }
+
+    private fun observeError() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.loadError.collect { hasError ->
+                if (hasError) {
+                    Toast.makeText(requireContext(), R.string.exercises_load_error, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
