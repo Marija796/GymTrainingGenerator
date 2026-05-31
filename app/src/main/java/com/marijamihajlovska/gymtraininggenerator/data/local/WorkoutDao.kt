@@ -22,4 +22,7 @@ interface WorkoutDao {
 
     @Query("UPDATE workouts SET completed = 1 WHERE firestoreId = :id")
     suspend fun markComplete(id: String)
+
+    @Query("DELETE FROM workouts WHERE userId = :userId")
+    suspend fun deleteAllByUser(userId: String)
 }

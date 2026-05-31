@@ -12,12 +12,16 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.marijamihajlovska.gymtraininggenerator.R
+import com.marijamihajlovska.gymtraininggenerator.data.local.AppDatabase
 import com.marijamihajlovska.gymtraininggenerator.databinding.FragmentDashboardBinding
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
@@ -66,16 +70,46 @@ class DashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
         }
         binding.btnLogout.setOnClickListener {
-            auth.signOut()
-            findNavController().navigate(
-                R.id.action_dashboardFragment_to_loginFragment,
-                null,
-                NavOptions.Builder().setPopUpTo(R.id.nav_graph, true).build()
-            )
+            val user = auth.currentUser
+            if (user != null && user.isAnonymous) {
+                val uid = user.uid
+                // Firestore guest cleanup — fire and forget
+                val firestoreDb = FirebaseFirestore.getInstance()
+                firestoreDb.collection("workouts").whereEqualTo("userId", uid).get()
+                    .addOnSuccessListener { docs ->
+                        if (!docs.isEmpty) {
+                            val batch = firestoreDb.batch()
+                            docs.forEach { batch.delete(it.reference) }
+                            batch.commit()
+                        }
+                    }
+                // Room + SharedPrefs cleanup, then sign out
+                lifecycleScope.launch {
+                    val appDb = AppDatabase.getDatabase(requireContext())
+                    appDb.workoutDao().deleteAllByUser(uid)
+                    appDb.stepRecordDao().deleteAllByUser(uid)
+                    requireContext()
+                        .getSharedPreferences("step_prefs_$uid", android.content.Context.MODE_PRIVATE)
+                        .edit().clear().apply()
+                    auth.signOut()
+                    if (isAdded) navigateToLogin()
+                }
+            } else {
+                auth.signOut()
+                navigateToLogin()
+            }
         }
         binding.btnNearbyGyms?.setOnClickListener {
             checkLocationAndOpenGyms()
         }
+    }
+
+    private fun navigateToLogin() {
+        findNavController().navigate(
+            R.id.action_dashboardFragment_to_loginFragment,
+            null,
+            NavOptions.Builder().setPopUpTo(R.id.nav_graph, true).build()
+        )
     }
 
     private fun checkLocationAndOpenGyms() {

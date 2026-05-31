@@ -1,10 +1,10 @@
 package com.marijamihajlovska.gymtraininggenerator.model
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "step_records")
+@Entity(tableName = "step_records", primaryKeys = ["date", "userId"])
 data class StepRecord(
-    @PrimaryKey val date: String,
+    val date: String,
+    val userId: String,
     val stepCount: Int
 )

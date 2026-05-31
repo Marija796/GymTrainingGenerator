@@ -5,17 +5,20 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.marijamihajlovska.gymtraininggenerator.data.local.AppDatabase
 import com.marijamihajlovska.gymtraininggenerator.model.StepRecord
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class ProgressViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val stepManager = StepCounterManager(application)
+    private val currentUserId: String =
+        FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+    private val stepManager = StepCounterManager(application, currentUserId)
     private val dao = AppDatabase.getDatabase(application).stepRecordDao()
 
     val todaySteps = stepManager.todaySteps
@@ -24,7 +27,7 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
     var counterActive = false
         private set
 
-    val stepHistory: LiveData<List<StepRecord>> = dao.getRecentDays(7)
+    val stepHistory: LiveData<List<StepRecord>> = dao.getRecentDays(currentUserId, 7)
 
     val averageSteps: LiveData<Int> = stepHistory.map { list ->
         if (list.isEmpty()) 0 else list.sumOf { it.stepCount } / list.size
@@ -33,10 +36,12 @@ class ProgressViewModel(application: Application) : AndroidViewModel(application
     init {
         viewModelScope.launch {
             stepManager.dayCompleted.collect { (date, count) ->
-                if (count > 0) {
-                    dao.upsert(StepRecord(date, count))
+                if (count > 0 && currentUserId.isNotEmpty()) {
+                    dao.upsert(StepRecord(date, currentUserId, count))
                 }
-                dao.deleteOlderThan(daysAgo(30))
+                if (currentUserId.isNotEmpty()) {
+                    dao.deleteOlderThan(currentUserId, daysAgo(30))
+                }
             }
         }
     }

@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">Gym Training Generator</string>
-    <string name="default_web_client_id">681335563808-jhjo9madddns1leq272fevg4dmjmo3ap.apps.googleusercontent.com</string>
-
-    <!-- Facebook SDK — replace with your actual values from developers.facebook.com -->
-    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
-    <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
-    <string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
-
     <!-- Auth -->
     <string name="login">Login</string>
     <string name="register">Register</string>

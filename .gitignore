@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# API secrets — real credentials, never commit these
+google-services.json
+app/src/main/res/values/secrets.xml

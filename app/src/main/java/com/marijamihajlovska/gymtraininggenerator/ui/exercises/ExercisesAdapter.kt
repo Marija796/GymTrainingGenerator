@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.marijamihajlovska.gymtraininggenerator.R
 import com.marijamihajlovska.gymtraininggenerator.model.ExerciseItem
+import java.util.Locale
 
 class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(DIFF) {
 
@@ -71,7 +72,8 @@ class ExercisesAdapter : ListAdapter<ExerciseItem, ExercisesAdapter.ViewHolder>(
         holder.tvEquipment.text = exercise.equipment
         holder.tvDifficulty.text = exercise.difficulty.displayName
         holder.tvSets.text = "${exercise.sets} sets · ${exercise.reps} reps · ${exercise.restSeconds}s rest"
-        holder.tvDescription.text = exercise.description
+        val isMk = Locale.getDefault().language == "mk"
+        holder.tvDescription.text = if (isMk && exercise.descriptionMk.isNotBlank()) exercise.descriptionMk else exercise.description
 
         val fallbackUrl = exercise.imageUrl.replace("/hqdefault.jpg", "/0.jpg")
         Glide.with(holder.itemView.context)

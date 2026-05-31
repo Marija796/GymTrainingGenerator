@@ -12,7 +12,8 @@ data class ExerciseItem(
     val restSeconds: Int,
     val description: String,
     val imageUrl: String,
-    val videoUrl: String
+    val videoUrl: String,
+    val descriptionMk: String = ""
 )
 
 enum class ExerciseCategory(val displayName: String) {

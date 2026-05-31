@@ -52,18 +52,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fitness_goal"
-                app:boxBackgroundColor="#FFFFFF"
+                app:boxBackgroundColor="@color/card_dark"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/text_secondary"
                 android:layout_marginBottom="14dp">
                 <AutoCompleteTextView
                     android:id="@+id/spinnerGoal"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:inputType="none"
+                    android:textColor="@color/text_primary"
                     android:paddingHorizontal="12dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,18 +75,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fitness_level"
-                app:boxBackgroundColor="#FFFFFF"
+                app:boxBackgroundColor="@color/card_dark"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/text_secondary"
                 android:layout_marginBottom="14dp">
                 <AutoCompleteTextView
                     android:id="@+id/spinnerLevel"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:inputType="none"
+                    android:textColor="@color/text_primary"
                     android:paddingHorizontal="12dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,18 +98,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/training_days"
-                app:boxBackgroundColor="#FFFFFF"
+                app:boxBackgroundColor="@color/card_dark"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/text_secondary"
                 android:layout_marginBottom="14dp">
                 <AutoCompleteTextView
                     android:id="@+id/spinnerDays"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:inputType="none"
+                    android:textColor="@color/text_primary"
                     android:paddingHorizontal="12dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,18 +121,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/muscle_focus"
-                app:boxBackgroundColor="#FFFFFF"
+                app:boxBackgroundColor="@color/card_dark"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/text_secondary"
                 android:layout_marginBottom="24dp">
                 <AutoCompleteTextView
                     android:id="@+id/spinnerMuscle"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:inputType="none"
+                    android:textColor="@color/text_primary"
                     android:paddingHorizontal="12dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 

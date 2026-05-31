@@ -13,10 +13,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class StepCounterManager(context: Context) : SensorEventListener {
+class StepCounterManager(context: Context, userId: String) : SensorEventListener {
 
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    private val prefs = context.getSharedPreferences("step_prefs", Context.MODE_PRIVATE)
+    private val prefs = context.getSharedPreferences("step_prefs_$userId", Context.MODE_PRIVATE)
 
     private val _todaySteps = MutableLiveData(0)
     val todaySteps: LiveData<Int> = _todaySteps
